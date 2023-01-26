@@ -1,6 +1,17 @@
 const canvas = document.getElementById("gameboard");
 const ctx = canvas.getContext("2d");
 
+//capturing HTML elements
+const flipCoinMove = document.querySelector("#flip-moves");
+const coin = document.querySelector(`#coin`);
+const button = document.querySelector(`#flip-button`);
+const result = document.querySelector(`#result `);
+const coinImage = document.querySelector(".coinImg");
+const coinMove1 = document.querySelector(".coinMove1");
+const coinMove2 = document.querySelector(".coinMove2");
+const coinMove3 = document.querySelector(".coinMove3");
+const goldCoinHead = "../Images/coin-head-removebg-preview.png";
+const goldCoinTail = "../Images/coin-tail-removebg-preview.png";
 
 //const logo = new Image() // logo
 
