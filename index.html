@@ -13,7 +13,6 @@
     <div id="wrapper">
       <div id="gamecontainer">
         <canvas id="gameboard" width="0" height="0" class="HJgameboard">
-
         </canvas>
         <div class="coinContainer">
           <img class='coinImg'src="" alt=""/>
@@ -21,21 +20,22 @@
           <img class='coinMove1'src="" alt=""/>
           <img class='coinMove2'src="" alt=""/>
           <img class='coinMove3'src="" alt=""/>
-        </div>  </div>
+            <section class="log" width='30%' height='20%'>
+
+            </section>
+            <button id="flip-button">Who goes first?</button>
+            <button id="flip-moves">Flip to move</button>
+          </div>
+        </div>  
       </div>
     </div>
         <!-- How to Play Button -->
-    
-      <button id = "game-instructions"> How to Play </button> 
+        <div id="coin-flip-cont">
+          <div id="coin">
+      <p><span id="result"></span></p>
 
-      <div id="coin-flip-cont">
-        <div id="coin">
-        <button id="flip-button">Who goes first?</button>
-        <button id="flip-moves">Flip to move</button>
-        <p><span id="result"></span></p>
-
-      <!-- Instructions on how to Start, play, and win. -->
-      <div id="startplaywin">
+       <!-- Instructions on how to Start, play, and win. -->
+       <div id="startplaywin">
         <p>
           <h2 class="howtostart">
             To Start: Be the first to get Heads on the Silver coin to go first!
@@ -55,12 +55,17 @@
             <br>
             Land on space 15 or 25 and <em>take another turn!</em> 
             <br>
+            At the start of every turn, if your piece is not on the start space, you can flip the <strong>Silver Coin</strong> to get another piece onto the board.
+            Flip heads and you've added a new piece to the board. 
+            Flip tails and you can not add a new piece to the board. 
+            You have to wait and try again your next turn. 
             </h2>
-          <h2 class ="howtowin">How to win:<br>Be the first to move your piece to the Golden star at the end of the game!</h2>
+          <h2 class ="howtowin">How to win:<br>Be the first to move all of your pieces to the Golden star at the end of the game!</h2>
         </p>
     </div>
     <div id="start-game">
-        <div id="coin1">
+      <button id="game-start"> Start Game</button>
+      <div id="coin1">
         <div id="coin1-heads"></div>
         <div id="coin1-tails"></div>
       </div>
@@ -73,7 +78,16 @@
         <div id="coin3-tails"></div>
       </div>
     </div>
+    <!-- Code for Silver Coin. that starts the game.  -->
+     <!-- <div id="start-coin">
+       <img src="./src/coin-head-silver.png" alt="silver coin heads" class ="silver-heads"/>
+       <img src ="./src/coin-tail-silver.png" alt="silver coin tail" class ="silver-tails"/>
+       
+       <div id="result"></div>
+    </div> -->
 
-     <script type="text/javascript" src="./js/index.js"></script>
+
+    <script type="text/javascript" src="./js/index.js"></script>
+    <script type="text/javascript" src="./js/cordinates.js"></script>
   </body>
 </html>
