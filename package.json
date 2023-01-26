@@ -1,4 +1,4 @@
-{
+{ "type": "module",
   "dependencies": {
     "boardgame.io": "^0.44.4"
   },
