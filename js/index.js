@@ -2,12 +2,32 @@ const canvas = document.getElementById("gameboard");
 const ctx = canvas.getContext("2d");
 
 const gameboard = new Image() // gameboard 
-gameboard.src = "./src/HJGameBoard.png"
+gameboard.src = "../src/HJGameBoard.png"
 
 const jackalsGP = new Image() //Jackals game pieces
-jackalsGP.src ="./src/jackalgamepiece.png"
+jackalsGP.src ="../src/jackalgamepiece.png"
 
+const houndsGP = new Image() // Hounds game piece 
+houndsGP.src ="./src/Houndgamepiece.png"
 
+//array to store the result of coin flip for moving
+let coinMoves = [];
+let round = 0;
+
+//current player playing
+let playing;
+
+//capturing HTML elements
+const flipCoinMove = document.querySelector("#flip-moves");
+const coin = document.querySelector(`#coin`);
+const button = document.querySelector(`#flip-button`);
+const result = document.querySelector(`#result `);
+const coinImage = document.querySelector(".coinImg");
+const coinMove1 = document.querySelector(".coinMove1");
+const coinMove2 = document.querySelector(".coinMove2");
+const coinMove3 = document.querySelector(".coinMove3");
+const goldCoinHead = "../Images/coin-head-removebg-preview.png";
+const goldCoinTail = "../Images/coin-tail-removebg-preview.png";
 
 // cordinates for white spots/hounds
 const whiteCords = [
@@ -131,8 +151,7 @@ const whiteCords = [
   },
 ];
 
-const houndsGP = new Image() // Hounds game piece 
-houndsGP.src ="./src/Houndgamepiece.png"
+
 //cordinates for black spots/jackals
 const blackCords = [
   {},
@@ -277,36 +296,6 @@ const moves = [
   },
 ];
 
-//array to store the result of coin flip for moving
-let coinMoves = [];
-let round = 0;
-
-//current player playing
-let playing;
-
-const gameboard = new Image(); // gameboard
-
-gameboard.src = "../src/HJGameBoard.png";
-
-const houndsGP = new Image(); // Hounds game piece
-houndsGP.src = "../src/Houndgamepiece.png";
-
-const jackalsGP = new Image(); //Jackals game pieces
-jackalsGP.src = "../src/jackalgamepiece.png";
-
-//capturing HTML elements
-const flipCoinMove = document.querySelector("#flip-moves");
-const coin = document.querySelector(`#coin`);
-const button = document.querySelector(`#flip-button`);
-const result = document.querySelector(`#result `);
-const coinImage = document.querySelector(".coinImg");
-const coinMove1 = document.querySelector(".coinMove1");
-const coinMove2 = document.querySelector(".coinMove2");
-const coinMove3 = document.querySelector(".coinMove3");
-const goldCoinHead = "../Images/coin-head-removebg-preview.png";
-const goldCoinTail = "../Images/coin-tail-removebg-preview.png";
-//ctx.drawImage(gameboard, 0, 0, 800, 800)
-
 //Start Coin animation & code 
 // objects for each player
 const jackals = {
@@ -348,8 +337,7 @@ function flipCoin() {
   console.log(playing.name);
 }
 
-function processResult(result) {
-  result.innerText = result.toUpperCase ();
+
 //coin flip to decide how many moves, "dice" of this game
 function flipMoves() {
   const rng = Math.floor(Math.random() * 2);
@@ -396,7 +384,7 @@ function flipMoves() {
     return;
   }
 }
-}
+
 //
 function checkForMoves() {
   round = 0;
