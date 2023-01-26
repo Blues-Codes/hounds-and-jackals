@@ -1,34 +1,7 @@
 const canvas = document.getElementById("gameboard");
 const ctx = canvas.getContext("2d");
 
-const gameboard = new Image() // gameboard 
-gameboard.src = "../src/HJGameBoard.png"
-
-const jackalsGP = new Image() //Jackals game pieces
-jackalsGP.src ="../src/jackalgamepiece.png"
-
-const houndsGP = new Image() // Hounds game piece 
-houndsGP.src ="./src/Houndgamepiece.png"
-
-//array to store the result of coin flip for moving
-let coinMoves = [];
-let round = 0;
-
-//current player playing
-let playing;
-
-//capturing HTML elements
-const flipCoinMove = document.querySelector("#flip-moves");
-const coin = document.querySelector(`#coin`);
-const button = document.querySelector(`#flip-button`);
-const result = document.querySelector(`#result `);
-const coinImage = document.querySelector(".coinImg");
-const coinMove1 = document.querySelector(".coinMove1");
-const coinMove2 = document.querySelector(".coinMove2");
-const coinMove3 = document.querySelector(".coinMove3");
-const goldCoinHead = "../Images/coin-head-removebg-preview.png";
-const goldCoinTail = "../Images/coin-tail-removebg-preview.png";
-
+//const logo = new Image() // logo
 // cordinates for white spots/hounds
 const whiteCords = [
   {},
@@ -151,7 +124,6 @@ const whiteCords = [
   },
 ];
 
-
 //cordinates for black spots/jackals
 const blackCords = [
   {},
@@ -195,6 +167,7 @@ const blackCords = [
     x: 430,
     y: 630,
   },
+
   {
     x: 600,
     y: 630,
@@ -273,7 +246,8 @@ const blackCords = [
   },
 ];
 
-
+// how many moves in the current round
+let currentMove;
 
 //array of moves depending on coin flips
 const moves = [
@@ -296,7 +270,36 @@ const moves = [
   },
 ];
 
-//Start Coin animation & code 
+//array to store the result of coin flip for moving
+let coinMoves = [];
+let round = 0;
+
+//current player playing
+let playing;
+
+const gameboard = new Image(); // gameboard
+
+gameboard.src = "../src/HJGameBoard.png";
+
+const houndsGP = new Image(); // Hounds game piece
+houndsGP.src = "../src/Houndgamepiece.png";
+
+const jackalsGP = new Image(); //Jackals game pieces
+jackalsGP.src = "../src/jackalgamepiece.png";
+
+//capturing HTML elements
+const flipCoinMove = document.querySelector("#flip-moves");
+const coin = document.querySelector(`#coin`);
+const button = document.querySelector(`#flip-button`);
+const result = document.querySelector(`#result `);
+const coinImage = document.querySelector(".coinImg");
+const coinMove1 = document.querySelector(".coinMove1");
+const coinMove2 = document.querySelector(".coinMove2");
+const coinMove3 = document.querySelector(".coinMove3");
+const goldCoinHead = "../images/coin-head.png";
+const goldCoinTail = "../images/coin-tail.png";
+//ctx.drawImage(gameboard, 0, 0, 800, 800)
+
 // objects for each player
 const jackals = {
   name: "jackals",
@@ -308,9 +311,7 @@ const jackals = {
   currentPosition: 0,
 };
 
-function deferFn(callback, ms) {
-  setTimeout (callback, ms);
-  const hounds = {
+const hounds = {
   name: "hounds",
   x: 0,
   y: 0,
@@ -319,9 +320,6 @@ function deferFn(callback, ms) {
   image: houndsGP,
   currentPosition: 0,
 };
-}
-// how many moves in the current round
-let currentMove;
 
 // who goes first depending on rng/coin flip
 function flipCoin() {
@@ -336,7 +334,6 @@ function flipCoin() {
   button.disabled = true;
   console.log(playing.name);
 }
-
 
 //coin flip to decide how many moves, "dice" of this game
 function flipMoves() {
@@ -384,22 +381,12 @@ function flipMoves() {
     return;
   }
 }
-
 //
 function checkForMoves() {
   round = 0;
   const heads = coinMoves.filter((current) => current === "heads");
   const tails = coinMoves.filter((current) => current === "tails");
-}
-function flipCoin() {
-  coin.setAttribute(`class`, '');
-  console.log("flipping")
-  const random = Math.random();
-  const result = random < 0.5 ? 'heads' : 'tails';
-  deferFn (function() {
-    coin.setAttribute(`class`, `animate-` + result);
-    deferFn(processResult.bind(null, result), 2900)
-  }, 100);
+
   if (heads.length === 3) {
     currentMove = moves[0].moves;
   }
@@ -422,7 +409,6 @@ function flipCoin() {
     coinMove2.src = "";
     coinMove3.src = "";
   }, 1500);
-
   if (playing.name === "hounds") {
     ctx.clearRect(playing.x, playing.y, playing.width, playing.height);
 
@@ -476,20 +462,8 @@ function flipCoin() {
   }
 }
 
+//Codes for game play using boardgame.io
 
-    function startGame() {
-      document.getElementById("startplaywin").style.display = "flex"
-    console.log("Starting")
-    document.getElementById("startplaywin").style.visibility = "visible"
-    //logo.style.visibility = "hidden"
-    //logo.style.height = "0px"
-    canvas.width = "800"
-    canvas.height = "750"
-    canvas.style.visibility = "visible"
-    canvas.style.display = "inherit"
-
-    ctx.drawImage(gameboard, 0, 0, 800, 800)
-}
 function startGame() {
   document.getElementById("startplaywin").style.display = "flex";
   console.log("Starting");
@@ -501,16 +475,8 @@ function startGame() {
   canvas.style.visibility = "visible";
   canvas.style.display = "inherit";
 
-  window.onload = function() {
-    document.getElementById("game-instructions").onclick = function() {
-      console.log("hitting button")
-      ctx.drawImage(gameboard, 0, 0, 800, 800,)
-      startGame();
-    };
-    // document.getElementById("startplaywin").onclick = function () {
   ctx.drawImage(gameboard, 0, 0, 800, 800);
 }
-
 
 window.onload = function () {
   document.getElementById("game-instructions").onclick = function () {
@@ -520,15 +486,9 @@ window.onload = function () {
   };
 };
 
-  button.addEventListener(`click`, flipCoin)
-  // // for moving game pieces after gold coins animate
-  // document.addEventListener('keydown', e => {
-
-  // })
 button.addEventListener(`click`, () => {
   flipCoin();
   flipCoinMove.addEventListener("click", () => {
     flipMoves();
   });
 });
-}
