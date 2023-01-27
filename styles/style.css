@@ -6,6 +6,9 @@ body {
   height: 100%;
 }
 
+#version{
+  font-size: 1px;
+}
 .endScreen {
   position:absolute;
   z-index: 101;
