@@ -84,11 +84,11 @@ const hounds = {
 function flipCoin() {
   const rng = Math.floor(Math.random() * 2);
   if (rng === 0) {
-    coinImage.src = "../Images/coin-head-silver.png";
+    coinImage.src = "images/coin-head-silver.png";
     playing = jackals;
     log1.innerHTML = `<h3>Heads! ANUBIS be praised! Jackals goes first!</h3>`;
   } else {
-    coinImage.src = "../Images/coin-tail-silver.png";
+    coinImage.src = "images/coin-tail-silver.png";
     playing = hounds;
     log1.innerHTML = `<h3>Tails! May RA bless you! Hounds goes first!</h3>`;
   }
