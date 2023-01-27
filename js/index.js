@@ -10,17 +10,15 @@ const coinImage = document.querySelector(".coinImg");
 const coinMove1 = document.querySelector(".coinMove1");
 const coinMove2 = document.querySelector(".coinMove2");
 const coinMove3 = document.querySelector(".coinMove3");
-const goldCoinHead = "../images/coin-head.png";
-const goldCoinTail = "../images/coin-tail.png";
+const goldCoinHead = "images/coin-head.png";
+const goldCoinTail = "images/coin-tail.png";
 const log1 = document.querySelector(`.log1`);
-const log2 = document.querySelector('.log2');
-const gameScreen = document.querySelector('#gamecontainer');
-console.log(gameScreen)
-
+const log2 = document.querySelector(".log2");
+const gameScreen = document.querySelector("#gamecontainer");
+console.log(gameScreen);
 
 // how many moves in the current round
 let currentMove;
-
 
 //array of moves depending on coin flips
 const moves = [
@@ -51,17 +49,16 @@ let playing;
 
 const gameboard = new Image(); // gameboard
 
-gameboard.src = "../src/HJGameBoard.png";
+gameboard.src = "src/HJGameBoard.png";
 
 const houndsGP = new Image(); // Hounds game piece
-houndsGP.src = "../src/Houndgamepiece.png";
+houndsGP.src = "src/Houndgamepiece.png";
 
 const jackalsGP = new Image(); //Jackals game pieces
-jackalsGP.src = "../src/jackalgamepiece.png";
+jackalsGP.src = "src/jackalgamepiece.png";
 
 const logo = new Image(); // logo
-logo.src= "../src/HJLogo.png";
-
+logo.src = "src/HJLogo.png";
 
 // objects for each player
 const jackals = {
@@ -149,10 +146,10 @@ function checkForMoves() {
   round = 0;
   const heads = coinMoves.filter((current) => current === "heads");
   const tails = coinMoves.filter((current) => current === "tails");
-  
-  if(playing.currentPosition > 29){
-    gameOver()
-  }
+
+  // if (playing.currentPosition > 29) {
+  //   gameOver();
+  // }
   if (heads.length === 3) {
     currentMove = moves[0].moves;
     log2.innerHTML = `<h3>3 Heads! ${playing.name} got ${currentMove} moves.</h3>`;
@@ -168,25 +165,89 @@ function checkForMoves() {
   if (tails.length === 3) {
     currentMove = moves[3].moves;
     log2.innerHTML = `<h3>WOW, 3 Tails! ${playing.name} got ${currentMove} moves.</h3>`;
-
   }
   console.log("💃", currentMove);
   console.log("💻", playing);
   // ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-
-   flipCoinMove.disabled = true;
+  flipCoinMove.disabled = true;
   setTimeout(() => {
     flipCoinMove.disabled = false;
-    coinMove1.src = "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
-    coinMove2.src = "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
-    coinMove3.src = "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
+    coinMove1.src =
+      "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
+    coinMove2.src =
+      "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
+    coinMove3.src =
+      "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
   }, 2000);
   if (playing.name === "hounds" && playing.currentPosition < 29) {
     let newHPos = playing.currentPosition + currentMove;
-    console.log("testing")
-    ctx.clearRect(playing.x, playing.y, playing.width, playing.height);
+    console.log(hounds);
+    console.log("testing");
+    // ctx.clearRect(playing.x, playing.y, playing.width, playing.height);
+    console.log(newHPos, "newpos");
 
+    playing.currentPosition += currentMove;
+    hounds.y = whiteCords[newHPos].y;
+    hounds.x = whiteCords[newHPos].x;
+    hounds.currentPosition = newHPos;
+    console.log(hounds.x);
+    console.log(hounds);
+
+    if (playing.currentPosition === 6 && playing.name === "hounds") {
+      // update();
+      console.log("6 to 20");
+      ctx.clearRect(playing.x, playing.y, playing.width, playing.height);
+      playing.currentPosition = 20;
+      playing.x = whiteCords[20].x;
+      playing.y = whiteCords[20].y;
+      console.log(newHPos);
+      console.log(playing);
+      console.log(hounds);
+
+      // ctx.drawImage(
+      //   playing.image,
+      //   playing.x,
+      //   playing.y,
+      //   playing.width,
+      //   playing.height
+      // );
+    }
+    if (playing.currentPosition === 20 && playing.name === "hounds") {
+      // update();
+      ctx.clearRect(playing.x, playing.y, playing.width, playing.height);
+      playing.currentPosition = 6;
+      playing.x = whiteCords[6].x;
+      playing.y = whiteCords[6].y;
+      console.log(newHPos);
+      console.log(playing);
+      console.log(hounds);
+
+    }
+    if (playing.currentPosition === 8 && playing.name === "hounds") {
+      // update();
+      ctx.clearRect(playing.x, playing.y, playing.width, playing.height);
+      
+      playing.currentPosition = 10;
+      playing.x = whiteCords[10].x;
+      playing.y = whiteCords[10].y;
+      console.log(newHPos);
+      console.log(playing);
+      console.log(hounds);
+
+    }
+
+    if (playing.currentPosition === 10 && playing.name === "hounds") {
+      // update();
+      ctx.clearRect(playing.x, playing.y, playing.width, playing.height);
+      playing.currentPosition = 8;
+      playing.x = whiteCords[8].x;
+      playing.y = whiteCords[8].y;
+      console.log(newHPos);
+      console.log(playing);
+      console.log(hounds);
+
+    }
     ctx.drawImage(
       playing.image,
       whiteCords[newHPos].x,
@@ -194,60 +255,79 @@ function checkForMoves() {
       95,
       95
     );
-    playing.currentPosition += currentMove;
-
-    if (playing.currentPosition === 6 && playing.name === "hounds") {
-      // update();
-      ctx.drawImage(
-        playing.image,
-        whiteCords[20].x,
-        whiteCords[20].y,
-        playing.width,
-        playing.height
-      );
-    }
-    if (playing.currentPosition === 20 && playing.name === "hounds") {
-      // update();
-      ctx.drawImage(
-        playing.image,
-        whiteCords[6].x,
-        whiteCords[6].y,
-        playing.width,
-        playing.height
-      );
-    }
-    if (playing.currentPosition === 8 && playing.name === "hounds") {
-      // update();
-      ctx.drawImage(
-        playing.image,
-        whiteCords[10].x,
-        whiteCords[10].y,
-        playing.width,
-        playing.height
-      );
-    }
-
-    if (playing.currentPosition === 10 && playing.name === "hounds") {
-      // update();
-      ctx.drawImage(
-        playing.image,
-        whiteCords[8].x,
-        whiteCords[8].y,
-        playing.width,
-        playing.height
-      );
-    }
     console.log(playing.currentPosition);
-
-    hounds.y = whiteCords[newHPos].y;
-    hounds.x = whiteCords[newHPos].x;
     playing = jackals;
-    console.log(playing);
+
     return;
   }
   if (playing.name === "jackals" && playing.currentPosition < 29) {
-    let newJPos = (playing.currentPosition + currentMove);
-    ctx.clearRect(playing.x, playing.y, playing.width, playing.height);
+    let newJPos = playing.currentPosition + currentMove;
+    console.log(jackals);
+    // ctx.clearRect(playing.x, playing.y, playing.width, playing.height);
+    console.log(newJPos, "jpos");
+
+    playing.currentPosition += currentMove;
+    console.log(playing.currentPosition);
+    jackals.x = blackCords[newJPos].x;
+    jackals.y = blackCords[newJPos].y;
+    jackals.currentPosition = newJPos;
+
+    console.log(jackals.x);
+    console.log(playing.currentPosition);
+
+    console.log(jackals);
+
+    if (playing.currentPosition === 6 && playing.name === "jackals") {
+      // update();
+      console.log("6 to 20");
+      ctx.clearRect(playing.x, playing.y, playing.width, playing.height);
+      playing.currentPosition = 20;
+      playing.x = blackCords[20].x;
+      playing.y = blackCords[20].y;
+      console.log(playing);
+      console.log(jackals);
+      // ctx.drawImage(
+      //   playing.image,
+      //   playing.x,
+      //   playing.y,
+      //   playing.width,
+      //   playing.height
+      // );
+    }
+    if (playing.currentPosition === 20 && playing.name === "jackals") {
+      // update();
+      ctx.clearRect(playing.x, playing.y, playing.width, playing.height);
+      playing.currentPosition = 6;
+      playing.x = blackCords[6].x;
+      playing.y = blackCords[6].y;
+      console.log(newJPos);
+      console.log(playing);
+      console.log(hounds);
+
+    }
+    if (playing.currentPosition === 8 && playing.name === "jackals") {
+      // update();
+      ctx.clearRect(playing.x, playing.y, playing.width, playing.height);
+      playing.currentPosition = 10;
+      playing.x = blackCords[10].x;
+      playing.y = blackCords[10].y;
+      console.log(newJPos);
+      console.log(playing);
+      console.log(hounds);
+
+    }
+
+    if (playing.currentPosition === 10 && playing.name === "jackals") {
+      // update();
+      ctx.clearRect(playing.x, playing.y, playing.width, playing.height);
+      playing.currentPosition = 8;
+      playing.x = blackCords[8].x;
+      playing.y = blackCords[8].y;
+      console.log(newJPos);
+      console.log(playing);
+      console.log(hounds);
+
+    }
     ctx.drawImage(
       playing.image,
       blackCords[newJPos].x,
@@ -255,63 +335,16 @@ function checkForMoves() {
       playing.width,
       playing.height
     );
-  playing.currentPosition += currentMove;
-  if (playing.currentPosition === 6 && playing.name === "jackals") {
-    // update();
-    ctx.drawImage(
-      playing.image,
-      blackCords[20].x,
-      blackCords[20].y,
-      playing.width,
-      playing.height
-    );
-  }
-  if (playing.currentPosition === 20 && playing.name === "jackals") {
-    // update();
-    ctx.drawImage(
-      playing.image,
-      blackCords[6].x,
-      blackCords[6].y,
-      playing.width,
-      playing.height
-    );
-  }
-  if (playing.currentPosition === 8 && playing.name === "jackals") {
-    // update();
-    ctx.drawImage(
-      playing.image,
-      blackCords[10].x,
-      blackCords[10].y,
-      playing.width,
-      playing.height
-    );
-  }
-
-  if (playing.currentPosition === 10 && playing.name === "jackals") {
-    // update();
-    ctx.drawImage(
-      playing.image,
-      blackCords[8].x,
-      blackCords[8].y,
-      playing.width,
-      playing.height
-    );
-  }
-    console.log(playing.currentPosition);
-    jackals.x = blackCords[newJPos].x;
-    jackals.y = blackCords[newJPos].y;
-    console.log(playing.currentPosition);
     playing = hounds;
-    console.log(playing);
-      return;
-    }
+    return;
+  }
 }
 function startGame() {
   document.getElementById("startplaywin").style.display = "flex";
   console.log("Starting");
   document.getElementById("startplaywin").style.visibility = "visible";
-  logo.style.visibility = "hidden"
-  logo.style.height = "0px"
+  logo.style.visibility = "hidden";
+  logo.style.height = "0px";
   canvas.width = "800";
   canvas.height = "750";
   canvas.style.visibility = "visible";
@@ -319,20 +352,22 @@ function startGame() {
 }
 
 function gameOver() {
-gameScreen.style.display = "none";
-  console.log("Game over")
-  ctx.clearRect(0,0,500,700)
-  ctx.fillStyle = 'black'
-  ctx.fillRect(0,0,500,700)
+  console.log("game over 2");
+  // cancelAnimationFrame(animate);
+  // gameScreen.style.display = "none";
+  //   console.log("Game over")
+  ctx.clearRect(0, 0, 800, 800);
+  ctx.fillStyle = "black";
+  ctx.fillRect(0, 0, 800, 800);
 
-  if (playing.name === "Jackals" && playing.currentPosition >= 29) {
-    ctx.fillStyle = "white"
-    ctx.font = '40px serif'
-    ctx.fillText("Jackals have won!", 150, 200)
-  } else if (playing.name === "Hounds" && playing.currentPosition >= 29) {
-    ctx.fillStyle = "white"
-    ctx.font = '40px serif'
-    ctx.fillText("Hounds have won!", 150, 200)
+  if (playing.name === "jackals" && playing.currentPosition > 28) {
+    ctx.fillStyle = "white";
+    ctx.font = "40px serif";
+    ctx.fillText("Jackals have won!", 150, 200);
+  } else if (playing.name === "hounds" && playing.currentPosition > 28) {
+    ctx.fillStyle = "white";
+    ctx.font = "40px serif";
+    ctx.fillText("Hounds have won!", 150, 200);
   }
 }
 
@@ -347,8 +382,14 @@ function animate() {
     jackals.height
   );
   ctx.drawImage(hounds.image, hounds.x, hounds.y, hounds.width, hounds.height);
-
-  requestAnimationFrame(animate);
+  let game = requestAnimationFrame(animate);
+  if (jackals.currentPosition > 28 || hounds.currentPosition > 28) {
+    console.log("game over")
+    cancelAnimationFrame(game)
+    gameOver();
+  }
+  
+  // console.log(requestAnimationFrame(animate))
 }
 window.onload = function () {
   animate();
@@ -364,6 +405,6 @@ button.addEventListener(`click`, () => {
   flipCoinMove.addEventListener("click", () => {
     flipMoves();
     // document.getElementById("startplaywin").style.display = "flex";
-  console.log("Starting");
- });
+    console.log("Starting");
+  });
 });

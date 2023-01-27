@@ -10,9 +10,21 @@ body {
   position:absolute;
   z-index: 101;
   width:auto
-  background-color: #e8ceb0;
-}
+  }
 
+  .replay{
+    width: 145px;
+  padding: 1 rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: black;
+  color: goldenrod;
+  font-family: "Explora", cursive;
+  font-size: 24px;
+  text-align: center;
+}
+  
 .logocontainer{
   width:auto;
   height:auto
