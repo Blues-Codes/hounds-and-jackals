@@ -12,13 +12,15 @@ const coinMove2 = document.querySelector(".coinMove2");
 const coinMove3 = document.querySelector(".coinMove3");
 const goldCoinHead = "../images/coin-head.png";
 const goldCoinTail = "../images/coin-tail.png";
-const log = document.querySelector(`.log`);
-const gameScreen = document.querySelector('#gamecontainer')
+const log1 = document.querySelector(`.log1`);
+const log2 = document.querySelector('.log2');
+const gameScreen = document.querySelector('#gamecontainer');
 console.log(gameScreen)
-//const logo = new Image() // logo
+
 
 // how many moves in the current round
 let currentMove;
+
 
 //array of moves depending on coin flips
 const moves = [
@@ -57,13 +59,17 @@ houndsGP.src = "../src/Houndgamepiece.png";
 const jackalsGP = new Image(); //Jackals game pieces
 jackalsGP.src = "../src/jackalgamepiece.png";
 
+const logo = new Image(); // logo
+logo.src= "../src/HJLogo.png";
+
+
 // objects for each player
 const jackals = {
   name: "jackals",
   x: 0,
   y: 0,
-  width: 80,
-  height: 80,
+  width: 95,
+  height: 95,
   image: jackalsGP,
   currentPosition: 0,
 };
@@ -72,8 +78,8 @@ const hounds = {
   name: "hounds",
   x: 0,
   y: 0,
-  width: 80,
-  height: 80,
+  width: 95,
+  height: 95,
   image: houndsGP,
   currentPosition: 0,
 };
@@ -83,9 +89,11 @@ function flipCoin() {
   if (rng === 0) {
     coinImage.src = "../Images/coin-head-silver.png";
     playing = jackals;
+    log1.innerHTML = `<h3>Heads! ANUBIS be praised! Jackals goes first!</h3>`;
   } else {
     coinImage.src = "../Images/coin-tail-silver.png";
     playing = hounds;
+    log1.innerHTML = `<h3>Tails! May RA bless you! Hounds goes first!</h3>`;
   }
   button.disabled = true;
   console.log(playing.name);
@@ -138,30 +146,28 @@ function flipMoves() {
   }
 }
 function checkForMoves() {
-  if (playing.currentPosition >= 29 && playing.name === "hounds" || playing.currentPosition >= 29 && playing.name === "jackals") {
-    gameScreen.style.display = "none"
-    
-    return
-  }
   round = 0;
   const heads = coinMoves.filter((current) => current === "heads");
   const tails = coinMoves.filter((current) => current === "tails");
-
+  
+  if(playing.currentPosition > 29){
+    gameOver()
+  }
   if (heads.length === 3) {
     currentMove = moves[0].moves;
-    log.innerHTML = `<h3>3 Heads! ${playing.name} got ${currentMove} moves.</h3>`;
+    log2.innerHTML = `<h3>3 Heads! ${playing.name} got ${currentMove} moves.</h3>`;
   }
   if (heads.length === 2) {
     currentMove = moves[1].moves;
-    log.innerHTML = `<h3>2 Heads! ${playing.name} got ${currentMove} moves.</h3>`;
+    log2.innerHTML = `<h3>2 Heads! ${playing.name} got ${currentMove} moves.</h3>`;
   }
   if (heads.length === 1) {
     currentMove = moves[2].moves;
-    log.innerHTML = `<h3> Heads! ${playing.name} got ${currentMove} moves.</h3>`;
+    log2.innerHTML = `<h3> Heads! ${playing.name} got ${currentMove} moves.</h3>`;
   }
   if (tails.length === 3) {
     currentMove = moves[3].moves;
-    log.innerHTML = `<h3>WOW, 3 Tails! ${playing.name} got ${currentMove} moves.</h3>`;
+    log2.innerHTML = `<h3>WOW, 3 Tails! ${playing.name} got ${currentMove} moves.</h3>`;
 
   }
   console.log("💃", currentMove);
@@ -175,7 +181,7 @@ function checkForMoves() {
     coinMove1.src = "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
     coinMove2.src = "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
     coinMove3.src = "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
-  }, 0);
+  }, 2000);
   if (playing.name === "hounds" && playing.currentPosition < 29) {
     let newHPos = playing.currentPosition + currentMove;
     console.log("testing")
@@ -185,10 +191,11 @@ function checkForMoves() {
       playing.image,
       whiteCords[newHPos].x,
       whiteCords[newHPos].y,
-      80,
-      80
+      95,
+      95
     );
     playing.currentPosition += currentMove;
+
     if (playing.currentPosition === 6 && playing.name === "hounds") {
       // update();
       ctx.drawImage(
@@ -303,37 +310,31 @@ function startGame() {
   document.getElementById("startplaywin").style.display = "flex";
   console.log("Starting");
   document.getElementById("startplaywin").style.visibility = "visible";
-  //logo.style.visibility = "hidden"
-  //logo.style.height = "0px"
+  logo.style.visibility = "hidden"
+  logo.style.height = "0px"
   canvas.width = "800";
   canvas.height = "750";
   canvas.style.visibility = "visible";
   canvas.style.display = "inherit";
 }
 
-// function gameOver() {
+function gameOver() {
+gameScreen.style.display = "none";
+  console.log("Game over")
+  ctx.clearRect(0,0,500,700)
+  ctx.fillStyle = 'black'
+  ctx.fillRect(0,0,500,700)
 
-//   gameOn = false
-
-//   console.log("Game over")
-//   clearInterval(animationId)
-//   clearInterval(intervalId)
-//   obstaclesArray = []
-
-//   ctx.clearRect(0,0,500,700)
-//   ctx.fillStyle = 'black'
-//   ctx.fillRect(0,0,500,700)
-
-//   if (score > 14) {
-//     ctx.fillStyle = "white"
-//     ctx.font = '40px serif'
-//     ctx.fillText("You've won!", 150, 200)
-//   } else {
-//     ctx.fillStyle = "white"
-//     ctx.font = '40px serif'
-//     ctx.fillText("You lose!", 150, 200)
-//   }
-// }
+  if (playing.name === "Jackals" && playing.currentPosition >= 29) {
+    ctx.fillStyle = "white"
+    ctx.font = '40px serif'
+    ctx.fillText("Jackals have won!", 150, 200)
+  } else if (playing.name === "Hounds" && playing.currentPosition >= 29) {
+    ctx.fillStyle = "white"
+    ctx.font = '40px serif'
+    ctx.fillText("Hounds have won!", 150, 200)
+  }
+}
 
 function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -359,7 +360,10 @@ window.onload = function () {
 };
 button.addEventListener(`click`, () => {
   flipCoin();
+  // document.getElementById(".log2").style.visibility = "hidden";
   flipCoinMove.addEventListener("click", () => {
     flipMoves();
-  });
+    // document.getElementById("startplaywin").style.display = "flex";
+  console.log("Starting");
+ });
 });

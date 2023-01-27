@@ -6,9 +6,23 @@ body {
   height: 100%;
 }
 
+.endScreen {
+  position:absolute;
+  z-index: 101;
+  width:auto
+  height:auto;
+  background-color: #e8ceb0;
+}
+
+.logocontainer{
+  width:auto;
+  height:auto
+}
+
 #gamecontainer {
   display: flex;
   flex-direction: row;
+  width:auto;
   gap: 5px;
   height: 90vh;
   padding-top: 1%;
@@ -21,13 +35,19 @@ body {
   gap: 5px;
 }
 
-.log {
-  border: 5px solid black;
+.log2 {
+  border: 3px solid black;
+  
+}
+
+.log1 {
+  border: 3px solid black;
+  
 }
 
 .coinImg {
-  width: 400px;
-  height: 400px;
+  width: 200px;
+  height: 200px;
   /* border: 3px solid black; */
 }
 

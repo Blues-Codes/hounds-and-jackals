@@ -11,22 +11,28 @@
   <body>
 <!-- code for the Hounds and Jackals game board  -->
     <div id="wrapper">
+      <div class =" logocontainer">
+        <img class ="logo" src="../src/HJLogo.png" alt ="Hound and Jackals logo"/>
+      </div>
       <div id="gamecontainer">
-        <canvas id="gameboard" width="0" height="0" class="HJgameboard">
+         <canvas id="gameboard" width="0" height="0" class="HJgameboard">
         </canvas>
         <div class="coinContainer">
           <img class='coinImg'src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt=""/>
+          <section class="log1" width='30%' height="20%"></section>
           <div>
           <img class='coinMove1'src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt=""/>
           <img class='coinMove2'src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt=""/>
           <img class='coinMove3'src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt=""/>
-            <section class="log" width='30%' height='20%'>
-
+            <section class="log2" width='30%' height='20%'>
             </section>
             <button id="flip-button">Who goes first?</button>
             <button id="flip-moves">Flip to move</button>
           </div>
         </div>  
+        <div class = "endScreen">
+          <button class="replay" onclick="startGame()">Play Again?</button> 
+        </div>
       </div>
     </div>
         <!-- How to Play Button -->
@@ -40,34 +46,28 @@
        <div id="startplaywin">
         <p>
           <h2 class="howtostart">
-            To Start: Be the first to get Heads on the Silver coin to go first!
+            To Start: Flip the Silver Coin to see who goes first!
           </h2> 
           <h2 class="howtoplay">How to Play:
             <br>
-            Flip the three Golden Coins to see how many spaces you move!
-            • 1 head and move 1 space
-            • 2 heads and move 2 spaces
-            • 3 heads and move 3 spaces
-            • 3 tails and move 5 spaces <em>plus get an extra turn!</em>
+            Flip the three Golden Coins to move your game piece!<br>
+            <ul>How many spaces do you move? 
+              <li>1 head and move 1 space</li>
+              <li>2 heads and move 2 spaces</li>
+              <li>3 heads and move 3 spaces</li>
+              <li>3 tails and move 5 spaces</li>
+            </ul>
             <br>
             Be careful of the Cobras! <br>
             Land on any of the Cobra tails and <em>immediately</em> you'll be moved to the cobra head!
             <br>
             Land on any of the Cobra heads and <em>immediately</em> you'll be moved to the Cobra tail!
             <br>
-            Land on space 15 or 25 and <em>take another turn!</em> 
-            <br>
-            At the start of every turn, if your piece is not on the start space, you can flip the <strong>Silver Coin</strong> to get another piece onto the board.
-            Flip heads and you've added a new piece to the board. 
-            Flip tails and you can not add a new piece to the board. 
-            You have to wait and try again your next turn. 
-            </h2>
-          <h2 class ="howtowin">How to win:<br>Be the first to move all of your pieces to the Golden star at the end of the game!</h2>
+            <h2 class ="howtowin">How to win:<br>Be the first to move your piece to the Golden star at the end of the game!</h2>
         </p>
     </div>
     <div id="start-game">
-      <button id="game-start"> Start Game</button>
-      <div id="coin1">
+       <div id="coin1">
         <div id="coin1-heads"></div>
         <div id="coin1-tails"></div>
       </div>
