@@ -10,8 +10,8 @@ const coinImage = document.querySelector(".coinImg");
 const coinMove1 = document.querySelector(".coinMove1");
 const coinMove2 = document.querySelector(".coinMove2");
 const coinMove3 = document.querySelector(".coinMove3");
-const goldCoinHead = "src/coin-head.png";
-const goldCoinTail = "src/coin-tail.png";
+const goldCoinHead = "../src/coin-head.png";
+const goldCoinTail = "../src/coin-tail.png";
 const log1 = document.querySelector(`.log1`);
 const log2 = document.querySelector(".log2");
 const gameScreen = document.querySelector("#gamecontainer");
@@ -84,11 +84,11 @@ const hounds = {
 function flipCoin() {
   const rng = Math.floor(Math.random() * 2);
   if (rng === 0) {
-    coinImage.src = "src/coin-head-silver.png";
+    coinImage.src = "../src/coin-head-silver.png";
     playing = jackals;
     log1.innerHTML = `<h3>Heads! ANUBIS be praised! Jackals goes first!</h3>`;
   } else {
-    coinImage.src = "src/coin-tail-silver.png";
+    coinImage.src = "../src/coin-tail-silver.png";
     playing = hounds;
     log1.innerHTML = `<h3>Tails! May RA bless you! Hounds goes first!</h3>`;
   }
