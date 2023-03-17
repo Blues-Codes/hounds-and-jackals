@@ -49,14 +49,13 @@ body {
   gap: 5px;
 }
 
-.log2 {
-  border: 3px solid black;
-  
-}
-
+.log2,
 .log1 {
   border: 3px solid black;
-  
+}
+
+.hidden {
+  border: none;
 }
 
 .coinImg {

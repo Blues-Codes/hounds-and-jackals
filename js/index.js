@@ -17,6 +17,12 @@ const log2 = document.querySelector(".log2");
 const gameScreen = document.querySelector("#gamecontainer");
 console.log(gameScreen);
 
+// hiding borders for the containers
+
+coinContainer.classList.add("hidden");
+log1.classList.add("hidden");
+log2.classList.add("hidden");
+
 // how many moves in the current round
 let currentMove;
 
@@ -61,39 +67,53 @@ const logo = new Image(); // logo
 logo.src = "src/HJLogo.png";
 
 // objects for each player
-const jackals = {
-  name: "jackals",
-  x: 0,
-  y: 0,
-  width: 95,
-  height: 95,
-  image: jackalsGP,
-  currentPosition: 0,
-};
+class Player {
+  constructor(name, x, y, image) {
+    this.name = name;
+    this.x = x;
+    this.y = y;
+    this.width = 95;
+    this.height = 95;
+    this.image = image;
+    this.currentPosition = 0;
+  }
+}
 
-const hounds = {
-  name: "hounds",
-  x: 0,
-  y: 0,
-  width: 95,
-  height: 95,
-  image: houndsGP,
-  currentPosition: 0,
-};
+const hounds = new Player("hounds", 0, 0, houndsImg);
+const jackals = new Player("jackals", 0, 0, jackalsImg);
+
+for (let i = 0; i < 5; i++) {
+  jackals.push({
+    id: i + 1,
+    name: "jackals",
+    currentPosition: -1, // -1 means the game piece is not in play yet
+    x: 20 + (i * 30),    // x-coordinate on the game board
+    y: 370,              // y-coordinate on the game board
+    width: 20,           // width of the game piece
+    height: 20,          // height of the game piece
+    isFinished: false    // whether the game piece has reached space 29
+  });
+  
+  hounds.push({
+    id: i + 1,
+    name: "hounds",
+    currentPosition: -1, // -1 means the game piece is not in play yet
+    x: 20 + (i * 30),    // x-coordinate on the game board
+    y: 20,               // y-coordinate on the game board
+    width: 20,           // width of the game piece
+    height: 20,          // height of the game piece
+    isFinished: false    // whether the game piece has reached space 29
+  });
+}
 
 function flipCoin() {
   const rng = Math.floor(Math.random() * 2);
-  if (rng === 0) {
-    coinImage.src = "src/coin-head-silver.png";
-    playing = jackals;
-    log1.innerHTML = `<h3>Heads! ANUBIS be praised! Jackals goes first!</h3>`;
-  } else {
-    coinImage.src = "src/coin-tail-silver.png";
-    playing = hounds;
-    log1.innerHTML = `<h3>Tails! May RA bless you! Hounds goes first!</h3>`;
-  }
+  playing = rng === 0 ? jackals : hounds;
+  const message = rng === 0
+    ? "<h3>Heads! ANUBIS be praised! Jackals goes first!</h3>"
+    : "<h3>Tails! May RA bless you! Hounds goes first!</h3>";
+  log1.innerHTML = message;
   button.disabled = true;
-  console.log(playing.name);
 }
 
 //coin flip to decide how many moves, "dice" of this game
@@ -183,70 +203,74 @@ function checkForMoves() {
   if (playing.name === "hounds" && playing.currentPosition < 29) {
     let newHPos = playing.currentPosition + currentMove;
     console.log(hounds);
-    console.log("testing");
     // ctx.clearRect(playing.x, playing.y, playing.width, playing.height);
-    console.log(newHPos, "newpos");
-
+    console.log(newHPos, "hPos");
+  
     playing.currentPosition += currentMove;
-    hounds.y = whiteCords[newHPos].y;
-    hounds.x = whiteCords[newHPos].x;
+    console.log(playing.currentPosition);
+    hounds.x = blackCords[newHPos].x;
+    hounds.y = blackCords[newHPos].y;
     hounds.currentPosition = newHPos;
+  
     console.log(hounds.x);
+    console.log(playing.currentPosition);
+  
     console.log(hounds);
-
+  
+    if (playing.currentPosition === 29) {
+      console.log("Hounds win!");
+      // add code to handle the end of the game
+    }
+  }
+ 
     if (playing.currentPosition === 6 && playing.name === "hounds") {
-      // update();
-      console.log("6 to 20");
       ctx.clearRect(playing.x, playing.y, playing.width, playing.height);
       playing.currentPosition = 20;
       playing.x = whiteCords[20].x;
       playing.y = whiteCords[20].y;
-      console.log(newHPos);
-      console.log(playing);
-      console.log(hounds);
 
-      // ctx.drawImage(
-      //   playing.image,
-      //   playing.x,
-      //   playing.y,
-      //   playing.width,
-      //   playing.height
-      // );
-    }
-    if (playing.currentPosition === 20 && playing.name === "hounds") {
-      // update();
+    } else if (playing.currentPosition === 20 && playing.name === "hounds") {
       ctx.clearRect(playing.x, playing.y, playing.width, playing.height);
       playing.currentPosition = 6;
       playing.x = whiteCords[6].x;
       playing.y = whiteCords[6].y;
-      console.log(newHPos);
-      console.log(playing);
-      console.log(hounds);
+
+    } else if (playing.currentPosition === 6 && playing.name === "jackals") {
+      ctx.clearRect(playing.x, playing.y, playing.width, playing.height);
+      playing.currentPosition = 14;
+      playing.x = blackCords[14].x;
+      playing.y = blackCords[14].y;
+    } else if (playing.currentPosition === 20 && playing.name === "jackals") {
+      ctx.clearRect(playing.x, playing.y, playing.width, playing.height);
+      playing.currentPosition = 6;
+      playing.x = blackCords[6].x;
+      playing.y = blackCords[6].y;
+    }
 
     }
+   
     if (playing.currentPosition === 8 && playing.name === "hounds") {
-      // update();
       ctx.clearRect(playing.x, playing.y, playing.width, playing.height);
-      
       playing.currentPosition = 10;
       playing.x = whiteCords[10].x;
       playing.y = whiteCords[10].y;
-      console.log(newHPos);
-      console.log(playing);
-      console.log(hounds);
 
-    }
-
-    if (playing.currentPosition === 10 && playing.name === "hounds") {
-      // update();
+    } else if (playing.currentPosition === 10 && playing.name === "hounds") {
       ctx.clearRect(playing.x, playing.y, playing.width, playing.height);
       playing.currentPosition = 8;
       playing.x = whiteCords[8].x;
       playing.y = whiteCords[8].y;
-      console.log(newHPos);
-      console.log(playing);
-      console.log(hounds);
 
+    } else if (playing.currentPosition === 8 && playing.name === "jackals") {
+      ctx.clearRect(playing.x, playing.y, playing.width, playing.height);
+      playing.currentPosition = 10;
+      playing.x = blackCords[10].x;
+      playing.y = blackCords[10].y;
+    } else if (playing.currentPosition === 10 && playing.name === "jackals") {
+      ctx.clearRect(playing.x, playing.y, playing.width, playing.height);
+      playing.currentPosition = 8;
+      playing.x = blackCords[8].x;
+      playing.y = blackCords[8].y;
     }
     ctx.drawImage(
       playing.image,
@@ -258,24 +282,30 @@ function checkForMoves() {
     console.log(playing.currentPosition);
     playing = jackals;
 
-    return;
-  }
-  if (playing.name === "jackals" && playing.currentPosition < 29) {
-    let newJPos = playing.currentPosition + currentMove;
-    console.log(jackals);
-    // ctx.clearRect(playing.x, playing.y, playing.width, playing.height);
-    console.log(newJPos, "jpos");
-
-    playing.currentPosition += currentMove;
-    console.log(playing.currentPosition);
-    jackals.x = blackCords[newJPos].x;
-    jackals.y = blackCords[newJPos].y;
-    jackals.currentPosition = newJPos;
-
-    console.log(jackals.x);
-    console.log(playing.currentPosition);
-
-    console.log(jackals);
+    
+        if (playing.name === "jackals" && playing.currentPosition < 29) {
+          let newJPos = playing.currentPosition + currentMove;
+          console.log(jackals);
+          // ctx.clearRect(playing.x, playing.y, playing.width, playing.height);
+          console.log(newJPos, "jpos");
+        
+          playing.currentPosition += currentMove;
+          console.log(playing.currentPosition);
+          jackals.x = blackCords[newJPos].x;
+          jackals.y = blackCords[newJPos].y;
+          jackals.currentPosition = newJPos;
+        
+          console.log(jackals.x);
+          console.log(playing.currentPosition);
+        
+          console.log(jackals);
+        
+          if (playing.currentPosition === 29) {
+            console.log("Jackals win!");
+            // add code to handle the end of the game
+          }
+        }
+    // return;
 
     if (playing.currentPosition === 6 && playing.name === "jackals") {
       // update();
@@ -337,8 +367,8 @@ function checkForMoves() {
     );
     playing = hounds;
     return;
-  }
-}
+  
+
 function startGame() {
   document.getElementById("startplaywin").style.display = "flex";
   console.log("Starting");
@@ -391,20 +421,22 @@ function animate() {
   
   // console.log(requestAnimationFrame(animate))
 }
-window.onload = function () {
-  animate();
-  document.getElementById("game-instructions").onclick = function () {
-    console.log("hitting button");
-    ctx.drawImage(gameboard, 0, 0, 800, 800);
-    startGame();
-  };
-};
+function flipCoin() {
+  const coins = document.querySelectorAll(".coin");
+  coins.forEach((coin) => {
+    coin.classList.add("flip");
+  });
+  setTimeout(() => {
+    coins.forEach((coin) => {
+      coin.classList.remove("flip");
+    });
+  }, 1500);
+
 button.addEventListener(`click`, () => {
   flipCoin();
-  // document.getElementById(".log2").style.visibility = "hidden";
-  flipCoinMove.addEventListener("click", () => {
-    flipMoves();
-    // document.getElementById("startplaywin").style.display = "flex";
-    console.log("Starting");
-  });
-});
+  flipMoves();
+  coinContainer.classList.toggle("hidden");
+  log1.classList.toggle("hidden");
+  log2.classList.toggle("hidden");
+})
+}
