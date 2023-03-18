@@ -36,6 +36,8 @@ jackalsGP.src = "src/jackalgamepiece.png";
 const logo = new Image(); // Logo
 logo.src = "src/HJLogo.png";
 
+const hounds = new Player("hounds", 0, 0, houndsGP);
+const jackals = new Player("jackals", 0, 0, jackalsGP);
 // Player class
 class Player {
   constructor(name, x, y, image) {
@@ -103,8 +105,6 @@ function checkForMoves() {
     }}
   
 
-const hounds = new Player("hounds", 0, 0, houndsGP);
-const jackals = new Player("jackals", 0, 0, jackalsGP);
 
 const gamePieces = [];
 
