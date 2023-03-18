@@ -1,105 +1,104 @@
-body {
-  padding: 0;
+/* Reset styles */
+* {
+  box-sizing: border-box;
   margin: 0;
+  padding: 0;
+}
+
+/* Body styles */
+body {
+  font-family: "Explora", cursive;
   background-color: #e8ceb0;
-  width: 100;
   height: 100%;
 }
 
-#version{
-  font-size: 1px;
+/* Version styles */
+#version {
+  font-size: 0.5rem;
 }
-.endScreen {
-  position:absolute;
-  z-index: 101;
-  width:auto
-  }
 
-  .replay{
-    width: 145px;
-  padding: 1 rem;
+/* End screen styles */
+.endScreen {
+  position: absolute;
+  z-index: 101;
+  width: auto;
+}
+
+.replay {
+  padding: 0.8rem 1rem;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   background-color: black;
   color: goldenrod;
-  font-family: "Explora", cursive;
-  font-size: 24px;
-  text-align: center;
-}
-  
-.logocontainer{
-  width:auto;
-  height:auto
+  font-size: 1.5rem;
 }
 
+/* Logo container styles */
+.logocontainer {
+  width: auto;
+  height: auto;
+}
+
+/* Game container styles */
 #gamecontainer {
   display: flex;
-  flex-direction: row;
-  width:auto;
-  gap: 5px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
   height: 90vh;
-  padding-top: 1%;
+  padding: 1%;
 }
 
+/* Coin container styles */
 .coinContainer {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 0.5rem;
 }
 
-.log2,
-.log1 {
-  border: 3px solid black;
-}
-
-.hidden {
-  border: none;
-}
-
+/* Coin styles */
 .coinImg {
   width: 200px;
   height: 200px;
-  /* border: 3px solid black; */
+  border: 3px solid black;
 }
 
-.coinMove1 {
-  width: 150px;
-  height: 150px;
-  border: 3px solid black;
-}
-.coinMove2 {
-  width: 150px;
-  height: 150px;
-  border: 3px solid black;
-}
+.coinMove1,
+.coinMove2,
 .coinMove3 {
   width: 150px;
   height: 150px;
   border: 3px solid black;
 }
+
+/* Game instructions styles */
 #game-instructions {
   display: flex;
-  position: left;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  padding: 0.8rem 1rem;
   background-color: black;
   color: goldenrod;
-  bottom: 0;
-  padding: 10px 20px;
-  font-family: "Explora", cursive;
-  width: 125px;
-  cursor: pointer;
-  font-size: 24px;
+  font-size: 1.5rem;
   border-radius: 5px;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
+  cursor: pointer;
 }
 
+/* Game board styles */
 #game-board {
-  /* position: absolute; */
   display: block;
   justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
+/* Canvas styles */
 canvas {
   border: 2px solid black;
   visibility: hidden;
@@ -107,43 +106,48 @@ canvas {
   margin-left: 300px;
 }
 
+/* Start, play, and win instructions styles */
 #startplaywin {
-  display: none;
-  visibility: hidden;
-  flex-wrap: wrap;
-  font-weight: bolder;
-  align-content: flex-start;
-  flex-wrap: wrap;
-  justify-content: left;
+  display: flex;
   flex-direction: column;
-  font-family: "Explora", cursive;
-  font-size: 26px;
+  align-items: flex-start;
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin: 1rem;
 }
 
-/* Start Coin Animation */
-
-#flip-button {
-  width: 145px;
-  padding: 1 rem;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  background-color: black;
-  color: goldenrod;
-  font-family: "Explora", cursive;
-  font-size: 24px;
-  text-align: center;
+#startplaywin h2 {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
 }
 
+#startplaywin p {
+  margin: 0;
+}
+
+#startplaywin ul {
+  margin-left: 1rem;
+  list-style-type: none;
+  font-size: 1rem;
+}
+
+#startplaywin li {
+  margin: 0.5rem 0;
+}
+
+#startplaywin em {
+  font-style: italic;
+}
+
+/* Start coin animation styles */
+#flip-button,
 #flip-moves {
-  width: 145px;
-  padding: 1 rem;
+  padding: 0.8rem 1rem;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   background-color: black;
   color: goldenrod;
-  font-family: "Explora", cursive;
-  font-size: 24px;
-  text-align: center;
+  font-size: 1.5rem;
+  margin: 1rem;
 }

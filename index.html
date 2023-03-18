@@ -11,83 +11,78 @@
   </head>
   <body>
 <!-- code for the Hounds and Jackals game board  -->
-    <div id="wrapper">
-      <div class =" logocontainer">
-        <img class ="logo" src="src/HJLogo.png" alt ="Hound and Jackals logo"/>
-      </div>
-      <div id="gamecontainer">
-         <canvas id="gameboard" width="0" height="0" class="HJgameboard">
-        </canvas>
-        <div class="coinContainer">
-          <img class='coinImg'src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt=""/>
-          <section class="log1" width='30%' height="20%"></section>
-          <div>
-          <img class='coinMove1'src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt=""/>
-          <img class='coinMove2'src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt=""/>
-          <img class='coinMove3'src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt=""/>
-            <section class="log2" width='30%' height='20%'>
-            </section>
-            <button id="flip-button">Who goes first?</button>
-            <button id="flip-moves">Flip to move</button>
-          </div>
-        </div>  
-        <!-- <div class = "endScreen">
-          <button class="replay" onclick="startGame()">Play Again?</button> 
-        </div> -->
-      </div>
+<div id="wrapper">
+  <div class =" logocontainer">
+    <img class ="logo" src="src/HJLogo.png" alt ="Hound and Jackals logo"/>
+    <div class="button-container">
+      <button id="flip-button" class="hj-button-color">Who goes first?</button>
+      <button id="flip-moves" class="hj-button-color">Flip to move</button>
     </div>
-        <!-- How to Play Button -->
-        <div id="coin-flip-cont">
-          <div id="coin">
-      <p><span id="result"></span></p>
-      <button id ="game-instructions"> How to Play </button> 
+  </div>
+  <div id="gamecontainer">
+    <canvas id="gameboard" width="0" height="0" class="HJgameboard"></canvas>
+    <div class="coinContainer">
+      <img class='coinImg'src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt=""/>
+      <section class="log1" width='30%' height="20%"></section>
+      <div>
+        <img class='coinMove1'src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt=""/>
+        <img class='coinMove2'src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt=""/>
+        <img class='coinMove3'src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt=""/>
+        <section class="log2" width='30%' height='20%'></section>
       </div>
-
-       <!-- Instructions on how to Start, play, and win. -->
-       <div id="startplaywin">
-        <p>
-          <h2 class="howtostart">
-            To Start: Flip the Silver Coin to see who goes first!
-          </h2> 
-          <h2 class="howtoplay">How to Play:
-            <br>
-            Flip the three Golden Coins to move your game piece!<br>
-            <ul>How many spaces do you move? 
-              <li>1 head and move 1 space</li>
-              <li>2 heads and move 2 spaces</li>
-              <li>3 heads and move 3 spaces</li>
-              <li>3 tails and move 5 spaces</li>
-            </ul>
-            <br>
-            Be careful of the Cobras! <br>
-            Land on any of the Cobra tails and <em>immediately</em> you'll be moved to the cobra head!
-            <br>
-            Land on any of the Cobra heads and <em>immediately</em> you'll be moved to the Cobra tail!
-            <br>
-            <h2 class ="howtowin">How to win:<br>Be the first to move your piece to the Golden star at the end of the game!</h2>
-        </p>
-    </div>
-    <div id="start-game">
-       <div id="coin1">
-        <div id="coin1-heads"></div>
-        <div id="coin1-tails"></div>
-      </div>
-      <div id="coin2">
-        <div id="coin2-heads"></div>
-        <div id="coin2-tails"></div>
-      </div>
-      <div id="coin3">
-        <div id="coin3-heads"></div>
-        <div id="coin3-tails"></div>
-      </div>
-    </div>
-    <!-- Code for Silver Coin. that starts the game.  -->
-     <!-- <div id="start-coin">
-       <img src="./src/coin-head-silver.png" alt="silver coin heads" class ="silver-heads"/>
-       <img src ="./src/coin-tail-silver.png" alt="silver coin tail" class ="silver-tails"/>
-       
-       <div id="result"></div>
+    </div>  
+    <!-- <div class = "endScreen">
+      <button class="replay" onclick="startGame()">Play Again?</button> 
     </div> -->
+  </div>
+</div>
+
+<!-- How to Play Button -->
+<div id="coin-flip-cont">
+  <div id="coin">
+    <p><span id="result"></span></p>
+    <button id ="game-instructions"> How to Play </button> 
+  </div>
+</div>
+
+<!-- Instructions on how to Start, play, and win. -->
+<div id="startplaywin">
+  <h2 class="howtostart">
+    To Start: Click the "Who goes first?" button above to flip the Silver Coin and see who goes first!
+  </h2> 
+  <h2 class="howtoplay">How to Play:
+    <br>
+    Click the three Golden Coins above to move your game piece!<br>
+    <ul>How many spaces do you move? 
+      <li>1 head and move 1 space</li>
+      <li>2 heads and move 2 spaces</li>
+      <li>3 heads and move 3 spaces</li>
+      <li>3 tails and move 5 spaces</li>
+    </ul>
+    <br>
+    Be careful of the Cobras! <br>
+    Land on any of the Cobra tails and <em>immediately</em> you'll be moved to the cobra head!
+    <br>
+    Land on any of the Cobra heads and <em>immediately</em> you'll be moved to the Cobra tail!
+    <br>
+  </h2>
+  <h2 class="howtowin">How to win:<br>Be the first to move your piece to the Golden star at the end of the game!</h2>
+</div>
+<div id="start-game">
+  <button id="coin1">
+    <div id="coin1-heads"></div>
+    <div id="coin1-tails"></div>
+  </button>
+  <button id="coin2">
+    <div id="coin2-heads"></div>
+    <div id="coin2-tails"></div>
+  </button>
+  <button id="coin3">
+    <div id="coin3-heads"></div>
+    <div id="coin3-tails"></div>
+  </button>
+</div>
+
     <p id="version">1.0.1</p>
 
     <script type="text/javascript" src="js/index.js"></script>
