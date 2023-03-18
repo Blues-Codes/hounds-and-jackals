@@ -50,8 +50,8 @@ class Player {
 }
 
 // Game pieces for hounds and jackals
-const hounds = [];
-const jackals = [];
+// const hounds = [];
+// const jackals = [];
 
 // Create game pieces and set initial positions
 for (let i = 0; i < 5; i++) {
@@ -88,17 +88,20 @@ function checkForMoves() {
         jackals[i].isFinished = true;
       }
       // objects for each player
-class Player {
-  constructor(name, x, y, image) {
-    this.name = name;
-    this.x = x;
-    this.y = y;
-    this.width = 95;
-    this.height = 95;
-    this.image = image;
-    this.currentPosition = 0;
-  }
-}
+      // class Player {
+      // constructor(name, x, y, image) {
+      //   this.name = name;
+      //   this.x = x;
+      //   this.y = y;
+      //   this.width = 95;
+      //   this.height = 95;
+      //   this.image = image;
+      //   this.currentPosition = 0;
+      // }
+      // }}
+    }
+    }}
+  
 
 const hounds = new Player("hounds", 0, 0, houndsGP);
 const jackals = new Player("jackals", 0, 0, jackalsGP);
@@ -495,24 +498,4 @@ function gameOver() {
     ctx.font = "40px serif";
     ctx.fillText("Hounds have won!", 150, 200);
   }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+};
